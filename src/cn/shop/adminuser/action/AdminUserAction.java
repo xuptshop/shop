@@ -6,8 +6,7 @@ import cn.shop.adminuser.vo.AdminUser;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 
-public class AdminUserAction extends ActionSupport implements
-		ModelDriven<AdminUser> {
+public class AdminUserAction extends ActionSupport implements ModelDriven<AdminUser> {
 	// 模型驱动使用的对象
 	private AdminUser adminUser = new AdminUser();
 
