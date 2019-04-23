@@ -2,7 +2,6 @@ package cn.shop.categorysecond.vo;
 
 import java.util.HashSet;
 import java.util.Set;
-
 import cn.shop.category.vo.Category;
 import cn.shop.product.vo.Product;
 
@@ -16,6 +15,7 @@ public class CategorySecond {
 	private String csname;
 	// 所属一级分类.存的是一级分类的对象.
 	private Category category;
+	private Integer cid;
 	// 配置商品集合
 	private Set<Product> products = new HashSet<Product>();
 	public Integer getCsid() {
@@ -42,5 +42,12 @@ public class CategorySecond {
 	public void setProducts(Set<Product> products) {
 		this.products = products;
 	}
-	
+
+	public Integer getCid() {
+		return cid;
+	}
+
+	public void setCid(Integer cid) {
+		this.cid = cid;
+	}
 }

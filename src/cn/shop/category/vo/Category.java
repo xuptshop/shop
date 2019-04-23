@@ -3,7 +3,6 @@ package cn.shop.category.vo;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
-
 import cn.shop.categorysecond.vo.CategorySecond;
 
 /**

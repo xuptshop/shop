@@ -1,15 +1,10 @@
 package cn.shop.user.service;
 
 import java.util.List;
-
 import org.springframework.transaction.annotation.Transactional;
-
-import cn.shop.order.vo.Order;
 import cn.shop.user.dao.UserDao;
 import cn.shop.user.vo.User;
-import cn.shop.utils.MailUitls;
 import cn.shop.utils.PageBean;
-import cn.shop.utils.UUIDUtils;
 
 /**
  * 用户名模块业务层代码
@@ -34,18 +29,18 @@ public class UserService {
 	// 业务层完成用户注册代码:
 	public void save(User user) {
 		// 将数据存入到数据库
-		user.setState(0); // 0:代表用户未激活.  1:代表用户已经激活.
-		String code = UUIDUtils.getUUID()+UUIDUtils.getUUID();
-		user.setCode(code);
+//		user.setState(10);
+//		String code = UUIDUtils.getUUID()+UUIDUtils.getUUID();
+//		user.setCode(code);
 		userDao.save(user);
 		// 发送激活邮件;
-		MailUitls.sendMail(user.getEmail(), code);
+//		MailUitls.sendMail(user.getEmail(), code);
 	}
 
-	// 业务层根据激活码查询用户
-	public User findByCode(String code) {
-		return userDao.findByCode(code);
-	}
+//	// 业务层根据激活码查询用户
+//	public User findByCode(String code) {
+//		return userDao.findByCode(code);
+//	}
 
 	// 修改用户的状态的方法
 	public void update(User existUser) {
@@ -55,6 +50,11 @@ public class UserService {
 	// 用户登录的方法
 	public User login(User user) {
 		return userDao.login(user);
+	}
+
+	// 商家用户登录
+	public User loginMerchant(User user) {
+		return userDao.loginMerchant(user);
 	}
 
 	// 业务层用户查询所有
@@ -87,7 +87,7 @@ public class UserService {
 
 
 	public User findByUid(Integer uid) {
-		return userDao.findByUid(uid);
+		return userDao. findByUid(uid);
 	}
 
 

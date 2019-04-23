@@ -2,7 +2,6 @@ package cn.shop.user.vo;
 
 import java.util.HashSet;
 import java.util.Set;
-
 import cn.shop.order.vo.Order;
 
 /**
@@ -16,7 +15,7 @@ import cn.shop.order.vo.Order;
   `email` varchar(255) DEFAULT NULL,
   `phone` varchar(255) DEFAULT NULL,
   `addr` varchar(255) DEFAULT NULL,
-  `state` int(11) DEFAULT NULL,
+  `state` int(11) DEFAULT 10,
   `code` varchar(64) DEFAULT NULL,
   PRIMARY KEY (`uid`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
@@ -29,8 +28,17 @@ public class User {
 	private String email;
 	private String phone;
 	private String addr;
-	private Integer state;
+	private Integer state;  //10-普通用户，账号可用 11-普通用户，账号不可用 20-商家用户，账号可用 21-商家用户，账号不可用
 	private String code;
+
+	public User() {
+	}
+
+	public User(String username, String password) {
+		this.username = username;
+		this.password = password;
+	}
+
 	// 一个用户对应多个订单:
 	private Set<Order> orders = new HashSet<Order>();
 	public Integer getUid() {
@@ -80,6 +88,9 @@ public class User {
 	}
 	public void setState(Integer state) {
 		this.state = state;
+	}
+	public void setState(String state) {
+		this.state = Integer.valueOf(state);
 	}
 	public String getCode() {
 		return code;

@@ -1,10 +1,8 @@
 package cn.shop.category.adminaction;
 
 import java.util.List;
-
 import cn.shop.category.service.CategoryService;
 import cn.shop.category.vo.Category;
-
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;

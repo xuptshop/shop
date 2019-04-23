@@ -125,6 +125,35 @@ public class ProductService {
 		return pageBean;
 	}
 
+	// 商家用户上传商品后台查询
+	public PageBean<Product> findByMerchantPage(Integer page, Integer uid) {
+		PageBean<Product> pageBean = new PageBean<Product>();
+		// 设置当前页数:
+		pageBean.setPage(page);
+		// 设置每页显示记录数:
+		int limit = 10;
+		pageBean.setLimit(limit);
+		// 设置总记录数:
+		int totalCount = 0;
+		totalCount = productDao.findMerchantCount(uid);
+		pageBean.setTotalCount(totalCount);
+		// 设置总页数:
+		int totalPage = 0;
+		// Math.ceil(totalCount / limit);
+		if (totalCount % limit == 0) {
+			totalPage = totalCount / limit;
+		} else {
+			totalPage = totalCount / limit + 1;
+		}
+		pageBean.setTotalPage(totalPage);
+		// 每页显示的数据集合:
+		// 从哪开始:
+		int begin = (page - 1) * limit;
+		List<Product> list = productDao.findByMerchantPage(begin, limit, uid);
+		pageBean.setList(list);
+		return pageBean;
+	}
+
 	// 业务层保存商品方法:
 	public void save(Product product) {
 		productDao.save(product);

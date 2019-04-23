@@ -1,9 +1,7 @@
 package cn.shop.categorysecond.dao;
 
 import java.util.List;
-
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
-
 import cn.shop.categorysecond.vo.CategorySecond;
 import cn.shop.utils.PageHibernateCallback;
 

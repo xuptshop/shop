@@ -1,9 +1,7 @@
 package cn.shop.categorysecond.service;
 
 import java.util.List;
-
 import org.springframework.transaction.annotation.Transactional;
-
 import cn.shop.categorysecond.dao.CategorySecondDao;
 import cn.shop.categorysecond.vo.CategorySecond;
 import cn.shop.utils.PageBean;

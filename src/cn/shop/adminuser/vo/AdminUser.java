@@ -1,4 +1,6 @@
 package cn.shop.adminuser.vo;
+
+
 /**
  * 后台用户登录实体
  * @author striner
@@ -8,6 +10,16 @@ public class AdminUser {
 	private Integer uid;
 	private String username;
 	private String password;
+
+	public AdminUser() {
+	}
+
+	public AdminUser(Integer uid, String username, String password) {
+		this.uid = uid;
+		this.username = username;
+		this.password = password;
+	}
+
 	public Integer getUid() {
 		return uid;
 	}

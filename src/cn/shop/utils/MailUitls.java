@@ -1,7 +1,6 @@
 package cn.shop.utils;
 
 import java.util.Properties;
-
 import javax.mail.Authenticator;
 import javax.mail.Message;
 import javax.mail.Message.RecipientType;

@@ -1,13 +1,11 @@
 package cn.shop.categorysecond.adminaction;
 
 import java.util.List;
-
 import cn.shop.category.service.CategoryService;
 import cn.shop.category.vo.Category;
 import cn.shop.categorysecond.service.CategorySecondService;
 import cn.shop.categorysecond.vo.CategorySecond;
 import cn.shop.utils.PageBean;
-
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
@@ -57,7 +55,7 @@ public class AdminCategorySecondAction extends ActionSupport implements
 		return "findAll";
 	}
 
-	// 跳转到天津页面的方法:
+	// 跳转到添加页面的方法:
 	public String addPage() {
 		// 查询所有一级分类.
 		List<Category> cList = categoryService.findAll();

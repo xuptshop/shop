@@ -18,6 +18,8 @@ public class Product {
 	private String pdesc;
 	private Integer is_hot;
 	private Date pdate;
+	private Integer csid;
+	private Integer uid; //上传商品用户
 	// 二级分类的外键:使用二级分类的对象.
 	private CategorySecond categorySecond;
 	public Integer getPid() {
@@ -74,5 +76,24 @@ public class Product {
 	public void setCategorySecond(CategorySecond categorySecond) {
 		this.categorySecond = categorySecond;
 	}
-	
+
+	public Integer getUid() {
+		return uid;
+	}
+
+	public void setUid(Integer uid) {
+		this.uid = uid;
+	}
+
+	public Integer getCsid() {
+		return csid;
+	}
+
+	public void setCsid(Integer csid) {
+		this.csid = csid;
+	}
+
+	public void setCsid(String csid) {
+		this.csid = Integer.valueOf(csid);
+	}
 }

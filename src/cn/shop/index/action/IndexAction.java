@@ -1,12 +1,10 @@
 package cn.shop.index.action;
 
 import java.util.List;
-
 import cn.shop.category.service.CategoryService;
 import cn.shop.category.vo.Category;
 import cn.shop.product.service.ProductService;
 import cn.shop.product.vo.Product;
-
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 

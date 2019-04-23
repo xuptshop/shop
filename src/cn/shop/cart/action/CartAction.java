@@ -6,7 +6,6 @@ import cn.shop.cart.vo.Cart;
 import cn.shop.cart.vo.CartItem;
 import cn.shop.product.service.ProductService;
 import cn.shop.product.vo.Product;
-
 import com.opensymphony.xwork2.ActionSupport;
 
 /**

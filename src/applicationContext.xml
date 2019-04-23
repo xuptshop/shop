@@ -78,7 +78,7 @@
 	<bean id="userAction" class="cn.shop.user.action.UserAction" scope="prototype">
 		<!-- 注入Service -->
 		<property name="userService" ref="userService"/>
-	</bean>
+    </bean>
 	
 	<!-- 商品模块的Action -->
 	<bean id="productAction" class="cn.shop.product.action.ProductAction" scope="prototype">
@@ -98,6 +98,7 @@
 	<!-- 配置后台登录的Action -->
 	<bean id="adminUserAction" class="cn.shop.adminuser.action.AdminUserAction" scope="prototype">
 		<property name="adminUserService" ref="adminUserService"/>
+		<property name="merchantService" ref="merchantService"/>
 	</bean>
 	
 	<!-- 配置后台一级管理的Action -->
@@ -121,6 +122,7 @@
 	<bean id="adminOrderAction" class="cn.shop.order.adminaction.AdminOrderAction" scope="prototype">
 		<property name="orderService" ref="orderService"/>
 	</bean>
+
 	<!-- 配置后台用户管理的Action -->
 	<bean id="userAdminAction" class="cn.shop.user.adminaction.UserAdminAction" scope="prototype">
 		<property name="userService" ref="userService"/>
@@ -151,6 +153,10 @@
 	<bean id="categorySecondService" class="cn.shop.categorysecond.service.CategorySecondService">
 		<property name="categorySecondDao" ref="categorySecondDao"/>
 	</bean>
+
+	<bean id="merchantService" class="cn.shop.merchant.service.MerchantService">
+		<property name="userDao" ref="userDao"/>
+	</bean>
 	
 	<!-- Dao的配置  ===========================-->
 	<bean id="userDao" class="cn.shop.user.dao.UserDao">
@@ -175,5 +181,9 @@
 	
 	<bean id="categorySecondDao" class="cn.shop.categorysecond.dao.CategorySecondDao">
 		<property name="sessionFactory" ref="sessionFactory"/>
+	</bean>
+
+	<!-- 拦截器配置 -->
+	<bean id="privilegeInterceptor" class="cn.shop.interceptor.PrivilegeInterceptor" scope="prototype">
 	</bean>
 </beans>

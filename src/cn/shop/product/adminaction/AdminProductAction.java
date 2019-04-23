@@ -1,19 +1,17 @@
 package cn.shop.product.adminaction;
 
 import java.io.File;
-import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
-
+import cn.shop.user.vo.User;
 import org.apache.commons.io.FileUtils;
 import org.apache.struts2.ServletActionContext;
-
 import cn.shop.categorysecond.service.CategorySecondService;
 import cn.shop.categorysecond.vo.CategorySecond;
 import cn.shop.product.service.ProductService;
 import cn.shop.product.vo.Product;
 import cn.shop.utils.PageBean;
-
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
@@ -74,9 +72,19 @@ public class AdminProductAction extends ActionSupport implements
 
 	// 查询所有的商品:
 	public String findAll() {
-		PageBean<Product> pageBean = productService.findByPage(page);
-		// 将PageBean数据存入到值栈中.
-		ActionContext.getContext().getValueStack().set("pageBean", pageBean);
+		//从session中取userType判断是商家用户还是超级管理员
+		String userType = (String) ServletActionContext.getRequest().getSession().getAttribute("userType");
+		if ("adminUser".equals(userType)) {  //超级管理员
+			PageBean<Product> pageBean = productService.findByPage(page);
+			// 将PageBean数据存入到值栈中.
+			ActionContext.getContext().getValueStack().set("pageBean", pageBean);
+		}else{  //商家用户
+			int uid = ((User) ServletActionContext.getRequest().getSession().getAttribute("existAdminUser")).getUid();
+			PageBean<Product> pageBean = productService.findByMerchantPage(page, uid);
+			// 将PageBean数据存入到值栈中.
+			ActionContext.getContext().getValueStack().set("pageBean", pageBean);
+		}
+
 		// 页面跳转
 		return "findAll";
 	}
@@ -92,9 +100,15 @@ public class AdminProductAction extends ActionSupport implements
 	}
 
 	// 保存商品的方法:
-	public String save() throws IOException {
+	public String save() throws Exception {
 		// 将提交的数据添加到数据库中.
-		product.setPdate(new Date());
+		SimpleDateFormat temp=new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+		String date2=temp.format(new Date());
+		product.setPdate(temp.parse(date2));
+
+		String csid = ServletActionContext.getRequest().getParameter("categorySecond.csid");
+		product.setCsid(csid);
+//		product.setPdate(new Date());
 		// product.setImage(image);
 		if(upload != null){
 			// 将商品图片上传到服务器上.
@@ -107,6 +121,11 @@ public class AdminProductAction extends ActionSupport implements
 			FileUtils.copyFile(upload, diskFile);
 	
 			product.setImage("products/" + uploadFileName);
+		}
+		//判断是不是商家用户，是则加uid
+		String userType = (String) ServletActionContext.getRequest().getSession().getAttribute("userType");
+		if("merchantUser".equals(userType)) {
+			product.setUid(((User) ServletActionContext.getRequest().getSession().getAttribute("existAdminUser")).getUid());
 		}
 		productService.save(product);
 		return "saveSuccess";
@@ -139,10 +158,13 @@ public class AdminProductAction extends ActionSupport implements
 	}
 
 	// 修改商品的方法
-	public String update() throws IOException {
+	public String update() throws Exception {
 		// 将信息修改到数据库
-		product.setPdate(new Date());
-		
+//		product.setPdate(new Date());
+		SimpleDateFormat temp=new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+		String date2=temp.format(new Date());
+		product.setPdate(temp.parse(date2));
+
 		// 上传:
 		if(upload != null ){
 			String delPath = ServletActionContext.getServletContext().getRealPath(

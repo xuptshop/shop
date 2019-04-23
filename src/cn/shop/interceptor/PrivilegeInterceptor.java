@@ -18,10 +18,10 @@ public class PrivilegeInterceptor extends MethodFilterInterceptor{
 	@Override
 	protected String doIntercept(ActionInvocation actionInvocation) throws Exception {
 		// 判断是否登录,如果登录,放行,没有登录,跳转到登录页面.
-		AdminUser adminUser = (AdminUser) ServletActionContext.getRequest()
-				.getSession().getAttribute("existAdminUser");
-		if(adminUser != null){
-			// 已经登录过
+		Object adminUser = ServletActionContext.getRequest().getSession().getAttribute("existAdminUser");
+		boolean isIndex = ServletActionContext.getRequest().getRequestURI().contains("index");
+		if(isIndex || adminUser != null){
+			// 访问登录页面或者已经登录过
 			return actionInvocation.invoke();
 		}else{
 			// 跳转到登录页面:

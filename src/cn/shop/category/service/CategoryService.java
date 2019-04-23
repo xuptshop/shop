@@ -1,9 +1,7 @@
 package cn.shop.category.service;
 
 import java.util.List;
-
 import org.springframework.transaction.annotation.Transactional;
-
 import cn.shop.category.dao.CategoryDao;
 import cn.shop.category.vo.Category;
 

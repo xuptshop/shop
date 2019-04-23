@@ -1,16 +1,10 @@
 package cn.shop.product.dao;
 
-import java.sql.SQLException;
 import java.util.List;
-
-import org.hibernate.HibernateException;
-import org.hibernate.Session;
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
-import org.springframework.orm.hibernate3.HibernateCallback;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
-
 import cn.shop.product.vo.Product;
 import cn.shop.utils.PageHibernateCallback;
 
@@ -106,10 +100,29 @@ public class ProductDao extends HibernateDaoSupport {
 		return 0;
 	}
 
+	public int findMerchantCount(int uid) {
+		String hql = "select count(*) from Product where uid = ?";
+		List<Long> list = this.getHibernateTemplate().find(hql, uid);
+		if(list != null && list.size() > 0){
+			return list.get(0).intValue();
+		}
+		return 0;
+	}
+
 	// 后台查询所有商品的方法
 	public List<Product> findByPage(int begin, int limit) {
 		String hql = "from Product order by pdate desc";
 		List<Product> list =  this.getHibernateTemplate().execute(new PageHibernateCallback<Product>(hql, null, begin, limit));
+		if(list != null && list.size() > 0){
+			return list;
+		}
+		return null;
+	}
+
+	public List<Product> findByMerchantPage(int begin, int limit, int uid) {
+		String hql = "from Product where uid = ? order by pdate desc";
+		// this.getHibernateTemplate().find(hql, uid)
+		List<Product> list =  this.getHibernateTemplate().execute(new PageHibernateCallback<Product>(hql, new Object[]{uid}, begin, limit));
 		if(list != null && list.size() > 0){
 			return list;
 		}

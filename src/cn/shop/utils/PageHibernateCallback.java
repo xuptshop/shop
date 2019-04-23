@@ -2,7 +2,6 @@ package cn.shop.utils;
 
 import java.sql.SQLException;
 import java.util.List;
-
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;

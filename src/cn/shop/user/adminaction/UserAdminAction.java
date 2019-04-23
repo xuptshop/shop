@@ -3,10 +3,11 @@ package cn.shop.user.adminaction;
 import cn.shop.user.service.UserService;
 import cn.shop.user.vo.User;
 import cn.shop.utils.PageBean;
-
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
+import org.apache.struts2.ServletActionContext;
+
 /**
  * 后台用户管理的Action类
  * @author striner
@@ -22,7 +23,7 @@ public class UserAdminAction extends ActionSupport implements ModelDriven<User>{
 	
 	// 注入用户的Service
 	private UserService userService;
-	
+
 	public void setUserService(UserService userService) {
 		this.userService = userService;
 	}
@@ -56,6 +57,7 @@ public class UserAdminAction extends ActionSupport implements ModelDriven<User>{
 	
 	// 后台用户的修改:
 	public String update(){
+		ServletActionContext.getResponse().setContentType("text/html;charset=UTF-8");
 		userService.update(user);
 		return "updateSuccess";
 	}
